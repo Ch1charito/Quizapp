@@ -41,6 +41,8 @@ let questions = [
     },
 ];
 
+let rightQuestions = 0;
+
 let currentQuestion = 0;
 
 function init() {
@@ -54,6 +56,11 @@ function showQuestion() {
     if (currentQuestion >= questions.length) {                                          // wir schreiben eine bedinungen das solange die neuen fragen angezeigt werden wie es welche gibt und sobald es keine weiteren fragen mehr gibt wollen wir einen END Screen
         document.getElementById('endScreen').style = "";                                // wir greifen wieder auf die id zu und geben über style das inline style welches wir im html gemacht haben den wert"" was so viel heißt wie leer, wir nehmen also display non weg
         document.getElementById('questionBody').style ="display: none";                 // dieser id fügen wir über das inline style das style attribut disyplay none hinzu --> das heißt sobald das quiz beendet ist verschwinder der frage body und ein neuer body wird angezeigt
+        
+        document.getElementById('amount-of-questions').innerHTML = questions.length;    // wir greifen über das innerHtml zu und verändern den wert zu der gesamten länge unseres arrays
+        document.getElementById('amount-of-right-questions').innerHTML = rightQuestions;  // wir fügen die Variable die wir standardmäßig auf 0 gesetzt haben als wert ein --> wir müssen natürlich noch dafür sorgen das der Wert im bezug zu den richtig beantworteten fragen steht
+        document.getElementById('header-img').src = './img/trophy.png';
+
     } else {
         let question = questions[currentQuestion];
 
@@ -78,6 +85,7 @@ function answer(selection) {
     if(selectedQuestionNumber == question['right_answer']) {
         console.log('richtige antwort');
         document.getElementById(selection).parentNode.classList.add('bg-success');      // wir greifen durch selection und durch parent.Node auf das Element zu wenn das elemnt richtig ist wird die class bg success hinzugeüfgt und es wird grün angezeigt
+        rightQuestions++;                                                               // sobald wir die frage richtig beantwortet haben erhöt sich der wert unserer variable den für den Endscreen brauchen
     } else {
         console.log('falsche antwort');
         document.getElementById(selection).parentNode.classList.add('bg-danger');       // das selbe nur das wenn es flasch ist halt die class für falsch hinzugefügt wird und somit wird es rot angezeigt
