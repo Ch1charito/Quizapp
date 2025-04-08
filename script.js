@@ -63,6 +63,19 @@ function showQuestion() {
 
 
 function answer(selection) {
+    let question = questions[currentQuestion];
+    let selectedQuestionNumber = selection.slice(-1);               // in der variable wird der letzter buchstabe aus der variablen selection gespeichert (slice(-1) ist eine Methode mit der man sich den letzten Wert von einem string ausgeben lassen kann)
+    let idOfRightAnswer = `answer_${question['right_answer']}`;
+
+    if(selectedQuestionNumber == question['right_answer']) {
+        console.log('richtige antwort');
+        document.getElementById(selection).parentNode.classList.add('bg-success');      // wir greifen durch selection und durch parent.Node auf das Element zu wenn das elemnt richtig ist wird die class bg success hinzugeüfgt und es wird grün angezeigt
+    } else {
+        console.log('falsche antwort');
+        document.getElementById(selection).parentNode.classList.add('bg-danger');       // das selbe nur das wenn es flasch ist halt die class für falsch hinzugefügt wird und somit wird es rot angezeigt
+        document.getElementById(idOfRightAnswer).parentNode.classList.add('bg-success');
+    }
     
+    document.getElementById('next-button').disabled = false;                            // durch disabled = false gebgen wir den button am ende dieser function frei und ist also benutzbar
     
 }
