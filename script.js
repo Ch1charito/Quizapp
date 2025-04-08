@@ -51,15 +51,21 @@ function init() {
 
 
 function showQuestion() {
-    let question = questions[currentQuestion];
+    if (currentQuestion >= questions.length) {                                          // wir schreiben eine bedinungen das solange die neuen fragen angezeigt werden wie es welche gibt und sobald es keine weiteren fragen mehr gibt wollen wir einen END Screen
+        document.getElementById('endScreen').style = "";                                // wir greifen wieder auf die id zu und geben über style das inline style welches wir im html gemacht haben den wert"" was so viel heißt wie leer, wir nehmen also display non weg
+        document.getElementById('questionBody').style ="display: none";                 // dieser id fügen wir über das inline style das style attribut disyplay none hinzu --> das heißt sobald das quiz beendet ist verschwinder der frage body und ein neuer body wird angezeigt
+    } else {
+        let question = questions[currentQuestion];
 
-    document.getElementById('question-number').innerHTML = currentQuestion + 1;  // wir greifen auf das element zu wo wir sagen bei welcher frage wir sind und geben das durch unsere variable wieder, da wir aber beim index 0 sind müssen wir + 1, machen damit es auch bei der ersten Frage anfängt
+        document.getElementById('question-number').innerHTML = currentQuestion + 1;  // wir greifen auf das element zu wo wir sagen bei welcher frage wir sind und geben das durch unsere variable wieder, da wir aber beim index 0 sind müssen wir + 1, machen damit es auch bei der ersten Frage anfängt
     
-    document.getElementById('questiontext').innerHTML = question['question'];
-    document.getElementById('answer_1').innerHTML = question['answer_1'];
-    document.getElementById('answer_2').innerHTML = question['answer_2'];
-    document.getElementById('answer_3').innerHTML = question['answer_3'];
-    document.getElementById('answer_4').innerHTML = question['answer_4'];
+        document.getElementById('questiontext').innerHTML = question['question'];
+        document.getElementById('answer_1').innerHTML = question['answer_1'];
+        document.getElementById('answer_2').innerHTML = question['answer_2'];
+        document.getElementById('answer_3').innerHTML = question['answer_3'];
+        document.getElementById('answer_4').innerHTML = question['answer_4'];
+    }
+    
 }
 
 
