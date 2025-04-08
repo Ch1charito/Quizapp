@@ -79,3 +79,25 @@ function answer(selection) {
     document.getElementById('next-button').disabled = false;                            // durch disabled = false gebgen wir den button am ende dieser function frei und ist also benutzbar
     
 }
+
+
+function nextQuestion() {               // eine function in der wir bestimmen was passiert sobald wir auf den Button nächste Frage drücken
+    currentQuestion++;                  // die variable wird von 0 auf 1 erhöht so gehen wir in den nächsten JSON
+    resetAnswerButton();                // die function um die farben zu entfernen
+    showQuestion();                     // danach führen wir die function aus mit der wir uns unsere Fragen anzeigen lassen nun aber mit der geänderten variable also aus dem anderen JSON
+    document.getElementById('next-button').disabled = true;  // wir machen nach dem laden der neuen Fragen den button wieder unbenutzbar, sodass man zuerst wieder die Frage beantworten muss um zur nächsten Frage zu gelangen
+    
+
+}
+
+
+function resetAnswerButton() {                                                          // man könnte es rein thereotisch auch in die function nextqustion mit rein nehmen,  aber damit alles übersichtlicher bleibt lagern wir das ganze einfach aus
+    document.getElementById('answer_1').parentNode.classList.remove('bg-danger');       // wir entfernen allen Elementen wieder die classen bg_danger und bg_success damit sie leer angezegit werden und man nicht weiß welche richtig und welche flasch ist
+    document.getElementById('answer_1').parentNode.classList.remove('bg-success');
+    document.getElementById('answer_2').parentNode.classList.remove('bg-danger');
+    document.getElementById('answer_2').parentNode.classList.remove('bg-success');
+    document.getElementById('answer_3').parentNode.classList.remove('bg-danger');
+    document.getElementById('answer_3').parentNode.classList.remove('bg-success');
+    document.getElementById('answer_4').parentNode.classList.remove('bg-danger');
+    document.getElementById('answer_4').parentNode.classList.remove('bg-success');
+}
