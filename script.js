@@ -53,6 +53,8 @@ function init() {
 function showQuestion() {
     let question = questions[currentQuestion];
 
+    document.getElementById('question-number').innerHTML = currentQuestion + 1;  // wir greifen auf das element zu wo wir sagen bei welcher frage wir sind und geben das durch unsere variable wieder, da wir aber beim index 0 sind müssen wir + 1, machen damit es auch bei der ersten Frage anfängt
+    
     document.getElementById('questiontext').innerHTML = question['question'];
     document.getElementById('answer_1').innerHTML = question['answer_1'];
     document.getElementById('answer_2').innerHTML = question['answer_2'];
