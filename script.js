@@ -45,6 +45,10 @@ let rightQuestions = 0;
 
 let currentQuestion = 0;
 
+let Audio_Right = new Audio('./sounds/right.mp3');  // ich gebe der variable den wert einer audio datei ---> so kann ich audios bzw mp3 datein in mein java-projekt mit einbinden
+
+let Audio_Wrong = new Audio('./sounds/wrong.mp3');
+
 function init() {
     document.getElementById('all-questions').innerHTML = questions.length;
 
@@ -92,11 +96,13 @@ function answer(selection) {
     if(selectedQuestionNumber == question['right_answer']) {
         console.log('richtige antwort');
         document.getElementById(selection).parentNode.classList.add('bg-success');      // wir greifen durch selection und durch parent.Node auf das Element zu wenn das elemnt richtig ist wird die class bg success hinzugeüfgt und es wird grün angezeigt
+        Audio_Right.play();                                                             // durch variable.play kann ich meine mp3 datei abspielen wenn eine frage richti beantwortet wurde
         rightQuestions++;                                                               // sobald wir die frage richtig beantwortet haben erhöt sich der wert unserer variable den für den Endscreen brauchen
     } else {
         console.log('falsche antwort');
         document.getElementById(selection).parentNode.classList.add('bg-danger');       // das selbe nur das wenn es flasch ist halt die class für falsch hinzugefügt wird und somit wird es rot angezeigt
         document.getElementById(idOfRightAnswer).parentNode.classList.add('bg-success');
+        Audio_Wrong.play();                                                             // ich spiele die mp3 ab wenn es falsch beantwortet wurde
     }
     
     document.getElementById('next-button').disabled = false;                            // durch disabled = false gebgen wir den button am ende dieser function frei und ist also benutzbar
