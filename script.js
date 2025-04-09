@@ -59,9 +59,16 @@ function showQuestion() {
         
         document.getElementById('amount-of-questions').innerHTML = questions.length;    // wir greifen über das innerHtml zu und verändern den wert zu der gesamten länge unseres arrays
         document.getElementById('amount-of-right-questions').innerHTML = rightQuestions;  // wir fügen die Variable die wir standardmäßig auf 0 gesetzt haben als wert ein --> wir müssen natürlich noch dafür sorgen das der Wert im bezug zu den richtig beantworteten fragen steht
-        document.getElementById('header-img').src = './img/trophy.png';
+        document.getElementById('header-img').src = './img/trophy.png';                   // wir ändern das bild im endscreen
 
     } else {
+        // wir müssen auf currentQuestion + 1 draufrechnen weil wir ja sonst bei 0 starten und nicht bei der ersten Frage
+        let percent = (currentQuestion + 1) / questions.length;                          // eine abfrage bei welcher frage wir sind also die aktuelle frage geteilt durch die gesamte länge der fragen
+        percent = Math.round(percent * 100);                                            // da wir ja prozent nicht in 0, zahlen angezigt haben wollen sondern anstatt 0,2 zb 20 müssen wir den wert von percent mal 100 nehmen, ---> wenn wir ein ungerades ergebnis haben können wir durch Math.round(das Ergebnis), das Ergebnis so abrunden das wir keine nachkomma stellen haben
+        document.getElementById('progress-bar').innerHTML = `${percent} %`;             // wir setzten den ermittelten wert über innerHTMl bei der id in der Progressbar ein
+        document.getElementById('progress-bar').style = `width: ${percent}%`;           // wir ändern das style in der progressbar zu dem prozent wert den wir errechnet haben
+        
+
         let question = questions[currentQuestion];
 
         document.getElementById('question-number').innerHTML = currentQuestion + 1;  // wir greifen auf das element zu wo wir sagen bei welcher frage wir sind und geben das durch unsere variable wieder, da wir aber beim index 0 sind müssen wir + 1, machen damit es auch bei der ersten Frage anfängt
@@ -116,4 +123,14 @@ function resetAnswerButton() {                                                  
     document.getElementById('answer_3').parentNode.classList.remove('bg-success');
     document.getElementById('answer_4').parentNode.classList.remove('bg-danger');
     document.getElementById('answer_4').parentNode.classList.remove('bg-success');
+}
+
+
+function restartGame() {                                                                // eine function mit der ich das game wieder neu starten kann
+    document.getElementById('header-img').src = './img/card-background.jpg';            // wir ändern das Bild wieder zurück zum card-background
+    document.getElementById('questionBody').style ="";                                  // question body wieder anzeigen lassen
+    document.getElementById('endScreen').style ="display: none";                        // endscreen ausblenden 
+    rightQuestions = 0;                                                                 // wir ändern die variable deswegen brauchen wir kein let und setzen die anzahl der richtigen und current questions wieder auf den anfangswert
+    currentQuestion = 0;
+    init();
 }
